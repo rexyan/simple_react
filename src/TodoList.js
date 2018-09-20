@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react';
+import TodoItem from './TodoItem'
 import './style.css'
 
 class TodoList extends Component {
@@ -6,8 +7,8 @@ class TodoList extends Component {
   constructor(props){
     super(props);
     this.state = {  
-      inputValue: 'hello',
-      list:['111', '222']
+      inputValue: '',
+      list:[]
     }
   }
 
@@ -24,19 +25,14 @@ class TodoList extends Component {
             onChange={ this.onChangeHandler.bind(this) } 
           /> 
           <button onClick={ this.handleBtnClick.bind(this) }>提交</button>
-        	<ul>
-          		{
-                this.state.list.map((value, index) =>{ 
-                    return <li 
-                              key={ index } 
-                              onClick={ this.handleBtnDeleteClick.bind(this, index) }
-                              // 不转义html标签，渲染出原始内容
-                              dangerouslySetInnerHTML={{__html:value}}
-                              >
-                          </li>
-                })
+          <ul>
+              {
+                  this.state.list.map((value, index) =>{ 
+                      // 子组件 content 属性为值，index属性为下标，用于删除元素使用，deleteItem为删除函数，传递函数的时候需要绑定this指向
+                      return  <TodoItem content={ value } key={ index } index={ index } deleteItem={ this.handleBtnDeleteClick.bind(this) } > </TodoItem>      
+                  })
               }
-        	</ul>
+          </ul>
         </Fragment>
       )
   }
