@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
-import TodoItem from './TodoItem'
-import './style.css'
+import TodoItem from './TodoItem';
+import axios from 'axios';
+import './style.css';
 
 class TodoList extends Component {
 
@@ -67,31 +68,15 @@ class TodoList extends Component {
     })
   }
 
-  // 组件即将被挂载的时候执行 
-  componentWillMount(){
-      console.log('componentWillMount')
-  }
-
-  // 组件被挂载之后执行 
+  // 页面加载完成后发起ajax请求
   componentDidMount(){
-      console.log('componentDidMount')
+    axios.get('http://www.baidu.com').then(()=>{
+      alert('执行成功')
+    }).catch(()=>{
+      alert('执行失败')
+    })
   }
 
-  // 在组件更新之前执行，返回bool值
-  shouldComponentUpdate(){
-      console.log('shouldComponentUpdate')
-      return true;
-  }
-
-  // shouldComponentUpdate 返回true就执行 componentWillUpdate
-  componentWillUpdate(){
-      console.log('componentWillUpdate')
-  }
-
-  // 组件更新完成之后会被执行
-  componentDidUpdate(){
-      console.log('componentDidUpdate')
-  }
 }
 
 export default TodoList;

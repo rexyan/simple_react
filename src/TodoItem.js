@@ -8,8 +8,8 @@ class TodoItem extends Component {
 	} 
 
 	render() {
-			const { content, default_props } = this.props; 
-			return (<li onClick={ this.deleteFunc } > { default_props } - { content } </li>)
+			const { content } = this.props; 
+			return (<li onClick={ this.deleteFunc } > { content } </li>)
 		}
 	
 	deleteFunc(){
@@ -17,30 +17,15 @@ class TodoItem extends Component {
 		deleteItem({ index })
 	}
 
-	// 当一个组件从父组件接受了参数，只要父组件的render函数被重新执行了，子组件的 componentWillReceiveProps 就会执行
-	// 注意：父组件的render函数第一次执行此函数是不会被执行的，只有父组件的render函数不是第一次执行，且子组件从父组件接受到了参数，componentWillReceiveProps才会被执行
-	componentWillReceiveProps(){
-	    console.log('componentWillReceiveProps')
+	// shouldComponentUpdate 可以接收两个参数，分别是新的Props值和State值
+	shouldComponentUpdate(nextProps, nextState){
+		// 这里进行一个判断，当content的内容和以前的一样，那么就返回false，子组件不渲染，反之就渲染子组件
+		if (nextProps.content !== this.props.content){
+			return true
+		}else{
+			return false
+		}
 	}
-
-	// 当子组件被移除的时候会执行
-  	componentWillUnmount(){
-      	console.log('componentWillUnmount')
-  	}
 }
-
-
-TodoItem.propTypes = {
-	content: PropTypes.string.isRequired, 
-	deleteItem: PropTypes.func,
-	index: PropTypes.number,
-	default_props: PropTypes.string.isRequired, 
-}
-
-TodoItem.defaultProps = {
-	default_props: 'xxxx', 
-}
-
-
 
 export default TodoItem;
