@@ -3,19 +3,17 @@ import React, { Component } from 'react'
 class TodoItem extends Component {
 	constructor(props){
 		super(props)
-		this.deleteFunc = this.deleteFunc.bind(this)
+		this.deleteFunc = this.deleteFunc.bind(this) // 在构造中进行this绑定
 	} 
 
 	render() {
-			return (<li onClick={ this.deleteFunc } > { this.props.content } </li>)
-	}
-
-	// 子组件中定义一个点击事件，作用是删除元素
+			const { content } = this.props; // 利用ES6中解构赋值的方法。等价于 const content = this.props.content;
+			return (<li onClick={ this.deleteFunc } > { content } </li>)
+		}
+	
 	deleteFunc(){
-		// 接收传递来的下标
-		const itemIndex = this.props.index
-		// 调用传递过来的删除函数，并把下标传进去
-		this.props.deleteItem(itemIndex)
+		const { index, deleteItem } = this.props; // 解构赋值
+		deleteItem({ index })
 	}
 }
 
