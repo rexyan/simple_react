@@ -16,22 +16,27 @@ class TodoItem extends Component {
 		const { index, deleteItem } = this.props; 
 		deleteItem({ index })
 	}
+
+	// 当一个组件从父组件接受了参数，只要父组件的render函数被重新执行了，子组件的 componentWillReceiveProps 就会执行
+	// 注意：父组件的render函数第一次执行此函数是不会被执行的，只有父组件的render函数不是第一次执行，且子组件从父组件接受到了参数，componentWillReceiveProps才会被执行
+	componentWillReceiveProps(){
+	    console.log('componentWillReceiveProps')
+	}
+
+	// 当子组件被移除的时候会执行
+  	componentWillUnmount(){
+      	console.log('componentWillUnmount')
+  	}
 }
 
-// 为父组件传递来的值进行校验
+
 TodoItem.propTypes = {
-	// 字符串类型，且必传
 	content: PropTypes.string.isRequired, 
-	// 函数类型
 	deleteItem: PropTypes.func,
-	// 数字类型
 	index: PropTypes.number,
 	default_props: PropTypes.string.isRequired, 
-
-	// 更多类型https://reactjs.org/docs/typechecking-with-proptypes.html#___gatsby
 }
 
-// 设置默认值
 TodoItem.defaultProps = {
 	default_props: 'xxxx', 
 }
