@@ -1,24 +1,16 @@
-import { CHANGE_INPUT_VALUE, ADD_TODO_ITEM, DELETE_TODO_ITEM, INIT_LIST_DATA, GTE_INIT_LIST_DATA} from './actionTypes'
+import { changeInput, clickAddItem, clickDeleteItem } from './actionTypes'
 
-export const getChangeAction = (value) => ({
-	type: CHANGE_INPUT_VALUE,
+
+export const changeInputAction = (value) => ({
+	type: changeInput,
 	value
 });
 
-export const getBtnClickAction = () => ({
-	type: ADD_TODO_ITEM
+export const clickAddItemAction = () => ({
+	type: clickAddItem,
 });
 
-export const getBtnDeleteAction = (index) => ({
-	type: DELETE_TODO_ITEM,
+export const clickDeleteItemAction = (index) => ({
+	type: clickDeleteItem,
 	index
 });
-
-export const initListDataAction = (value) => ({
-	type: INIT_LIST_DATA,
-	value
-})
-
-export const getInitListData = () => ({
-	type: GTE_INIT_LIST_DATA,
-})
