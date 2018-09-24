@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import store from './store'
-import { getChangeAction, getBtnClickAction, getBtnDeleteAction, getTodoListData } from './store/actionCreator'
+import { getChangeAction, getBtnClickAction, getBtnDeleteAction, getInitListData } from './store/actionCreator'
 import TodoListUI from './TodoListUI'
 
 
@@ -28,8 +28,7 @@ class TodoList extends Component{
 	}
 
 	componentDidMount(){
-		// 这里触发action 执行异步操作去请求数据
-		const action = getTodoListData()
+		const action = getInitListData()
 		store.dispatch(action)
 	}
 
