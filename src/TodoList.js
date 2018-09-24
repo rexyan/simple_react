@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import store from './store'
-import { getChangeAction, getBtnClickAction, getBtnDeleteAction, initListDataAction } from './store/actionCreator'
+import { getChangeAction, getBtnClickAction, getBtnDeleteAction, getTodoListData } from './store/actionCreator'
 import TodoListUI from './TodoListUI'
-import axios from 'axios'
+
 
 class TodoList extends Component{
 	constructor(props){
@@ -28,14 +28,9 @@ class TodoList extends Component{
 	}
 
 	componentDidMount(){
-		// Mock data
-		const url = 'http://www.mocky.io/v2/5ba88d043200005f00e2eafb'
-		axios.get(url).then((res)=> {
-			const action = initListDataAction(res.data)
-			store.dispatch(action)
-		}).catch(()=>{
-			alert('HTTP 请求失败！')
-		})
+		// 这里触发action 执行异步操作去请求数据
+		const action = getTodoListData()
+		store.dispatch(action)
 	}
 
 	handleChange(e){
